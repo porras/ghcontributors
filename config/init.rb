@@ -4,4 +4,4 @@ require 'user'
 require 'repo'
 
 require 'couchrest'
-DB = CouchRest.database('http://localhost:5984/ghcontributors')
+DB = CouchRest.database!('http://localhost:5984/ghcontributors2')
