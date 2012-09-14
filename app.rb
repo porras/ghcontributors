@@ -9,6 +9,10 @@ get '/' do
   end
 end
 
+get '/faq' do
+  erb :faq
+end
+
 get '/:user' do
   if @user = User.get(params[:user])
     erb :user
@@ -17,3 +21,6 @@ get '/:user' do
     erb :no_user
   end
 end
+
+
+helpers Helpers

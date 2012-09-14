@@ -1,7 +1,15 @@
-<h1><%= @user.username %></h1>
+<div class="page-header">
+  <h1><%= github_link @user.username %></h1>
+</div>
 
-<ul>
+<dl class="dl-horizontal">
   <% @user.contributions.each do |repo, n| %>
-  <li><%= repo %>: <%= n %> commits</li>
+  <dt><%= github_link repo %></dt>
+  <dd>
+    <div class="progress">
+      <!-- TODO: normalize bar sizes to max contributor -->
+      <div class="bar" style="width: <%= n %>%;"><%= commits_link repo, @user.username, n %></div>
+  </div>
+  </dd>
   <% end %>
-</ul>
+</dl>
