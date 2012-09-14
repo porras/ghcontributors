@@ -1,7 +1,8 @@
 class User < Struct.new(:username, :contributions)
   class << self
     def get(username)
-      new(username, contributions(username))
+      contrib = contributions(username)
+      new(username, contrib) unless contrib.empty?
     end
   
     def contributions(username)

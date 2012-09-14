@@ -10,6 +10,10 @@ get '/' do
 end
 
 get '/:user' do
-  @user = User.get(params[:user])
-  erb :user
+  if @user = User.get(params[:user])
+    erb :user
+  else
+    status 404
+    erb :no_user
+  end
 end
