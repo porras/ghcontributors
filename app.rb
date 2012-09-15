@@ -13,6 +13,15 @@ get '/faq' do
   erb :faq
 end
 
+get '/repo' do
+  erb :repo
+end
+
+post '/repo' do
+  Repo.add(params[:repo]).update
+  redirect '/repo'
+end
+
 get '/:user' do
   if @user = User.get(params[:user])
     erb :user
