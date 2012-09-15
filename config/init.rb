@@ -5,4 +5,5 @@ require 'repo'
 require 'helpers'
 
 require 'couchrest'
-DB = CouchRest.database!('http://localhost:5984/ghcontributors2')
+ENV['CLOUDANT_URL'] ||= 'http://localhost:5984'
+DB = CouchRest.database!("#{ENV['CLOUDANT_URL']}/ghcontributors")
