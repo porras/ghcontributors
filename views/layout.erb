@@ -39,5 +39,14 @@
     
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        $('#add_repo_link').click(function() {
+          $(this).parents('p').hide();
+          $('#add_repo').show();
+          return false;
+        });
+      });
+    </script>
   </body>
 </html>

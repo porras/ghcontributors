@@ -13,13 +13,9 @@ get '/faq' do
   erb :faq
 end
 
-get '/repo' do
-  erb :repo
-end
-
 post '/repo' do
   Repo.add(params[:repo]).update
-  redirect '/repo'
+  redirect back
 end
 
 get '/:user' do
