@@ -6,7 +6,7 @@ class User < Struct.new(:username, :contributions)
     end
   
     def contributions(username)
-      rows = DB.view('ghcontributors/contributions', :start_key => [username], :end_key => [username, {}])['rows']
+      rows = DB.view('ghcontributors/contributions', :startkey => [username], :endkey => [username, {}])['rows']
       rows = rows.map { |row| [row['key'][1], row['value']] }.sort_by { |repo, contributions| -contributions }
       Hash[*rows.flatten]
     end
