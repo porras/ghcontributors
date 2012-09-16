@@ -1,9 +1,23 @@
 <div class="hero-unit">
+  
   <h2>Github Contributors Frequently Asked Questions</h2>
-  <h3>Wadus?</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <h3>Wadus?</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <h3>Wadus?</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  
+  <h3>Where does the data come from?</h3>
+  <p>From the <a href="http://developer.github.com/">Github API</a>. It's the same data you see in a repo contributors page (see the <a href="https://github.com/rails/rails/graphs/contributors">rails/rails</a> one, for example), but aggregated by user instead of by repo.</p>
+  
+  <h3>How often is the data updated?</h3>
+  <p>Once a day. One of the improvements planned is to add a hook you can set up in your Github repo so it can be updated each time someone pushes.</p>
+  
+  <h3>This site says I have X commits in <em>rails/rails</em> but <a href="http://contributors.rubyonrails.org/">RailsContributors</a> says I have Y (and X &lt; Y)</h3>
+  <p>This site gets its data automatically from the Github API, so it only includes commits since Rails moved to Github. RailsContributors instead, thanks to the great <a href="http://contributors.rubyonrails.org/names_mapping">editorial work</a> done by <a href="http://www.hashref.com/">Xavi</a> and others, shows also commits from the pre-Github days. So, for Rails, Rails Contributors is a more accurate source than Github Contributors (but of course it only includes one project).</p>
+  <p>The same may be true for other projects not originally hosted on Github.</p>
+  
+  <h3>Is there any kind of <em>ranking</em> of users by contributions?</h3>
+  <p>No. This site is only a place when you can show (and be proud of) your open source contributions altogether, or check (and admire) a fellow developer ones, but not any sort of competition. Apart from that, since not all commits are created equal, and some fix small typos in obscure personal projects while other add great features to projects used by millions, it would be a very silly competition.</p>
+  
+  <h3>Who are you?</h3>
+  <p>My name is Sergio Gil, and I'm also known as <em>porras</em> in <a href="http://twitter.com/porras">Twitter</a>, <a href="http://github.com/porras">Github</a>, and mostly everywhere else. I'm a Spanish web developer based in Berlin, Germany. I love open source, I love Github, and I love what Github means for open source.</p>
+  
+  <h3>Which technologies does this site use?</h3>
+  <p>Mainly: <a href="http://www.ruby-lang.org/">Ruby</a>, <a href="http://www.sinatrarb.com/">Sinatra</a>, <a href="http://couchdb.apache.org/">CouchDB</a>, <a href="http://heroku.com/">Heroku</a>, <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>.</p>
 </div>
