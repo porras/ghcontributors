@@ -21,13 +21,24 @@ namespace :db do
       }
     JS
     
+    SIZES = <<-JS
+      function(doc) {
+        if (doc.type == "repo") {
+          for (user in doc.contributors) {
+            emit(doc.contributors[user]);
+          }
+        }
+      }
+    JS
+    
     DB.delete_doc DB.get("_design/ghcontributors") rescue nil
 
     DB.save_doc({
       "_id" => "_design/ghcontributors",
       :views => {
         :contributions => {:map => CONTRIBUTIONS},
-        :repos => {:map => REPOS}
+        :repos => {:map => REPOS},
+        :sizes => {:map => SIZES}
       }
     })
 

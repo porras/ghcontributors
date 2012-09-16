@@ -11,4 +11,8 @@ class User < Struct.new(:username, :contributions)
       Hash[*rows.flatten]
     end
   end
+  
+  def max_commits
+    @max_commits ||= DB.view('ghcontributors/sizes', :limit => 1, :descending => true)['rows'][0]['key']
+  end
 end
