@@ -29,5 +29,7 @@ class Repo < Struct.new(:name, :doc)
         h[contributor.login] = contributor.contributions
       end
     end
+  rescue Octokit::NotFound
+    {}
   end
 end
