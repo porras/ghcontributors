@@ -10,6 +10,12 @@ class Repo < Struct.new(:name, :doc)
     def add(name)
       get(name) || (DB.save_doc(:type => 'repo', :name => name) && get(name))
     end
+    
+    def all
+      DB.view('ghcontributors/repos')['rows'].map do |row|
+        new(row['key'], row['value'])
+      end
+    end
   end
   
   def update

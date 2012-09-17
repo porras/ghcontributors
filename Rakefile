@@ -44,3 +44,14 @@ namespace :db do
 
   end
 end
+
+namespace :update do
+  desc 'Update all repos'
+  task :all do
+    require './config/init'
+    require 'benchmark'
+    repos = Repo.all
+    time = Benchmark.measure { repos.each(&:update) }
+    puts "Updated %d repos in %0.2f seconds" % [repos.size, time.real]
+  end
+end
