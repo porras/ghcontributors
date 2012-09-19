@@ -16,6 +16,10 @@ class Repo < Struct.new(:name, :doc)
         new(row['key'], row['value'])
       end
     end
+    
+    def count
+      DB.view('ghcontributors/repos', :limit => 0)['total_rows']
+    end
   end
   
   def update
