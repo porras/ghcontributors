@@ -55,3 +55,25 @@ namespace :update do
     puts "Updated %d repos in %0.2f seconds" % [repos.size, time.real]
   end
 end
+
+namespace :data do
+  desc 'Gets most popular repos from Github'
+  task :get do
+    require 'open-uri'
+    require 'nokogiri'
+
+    languages = Nokogiri.parse(open('https://github.com/languages').read).css('.left table tr a').map {|l| l[:href]}.uniq
+    languages.each_with_index do |link, i|
+      puts "Language #{i + 1}/#{languages.size} (#{link})"
+      pages = (1..10).to_a
+      pages.each do |page|
+        puts "  Page #{page}/#{pages.size}"
+        repos = Nokogiri.parse(open("https://github.com#{link}/most_watched?page=#{page}").read).css('table.repo tr .title a').map {|l| l[:href]}.uniq
+        repos.each_with_index do |repo, i|
+          puts "    Repo #{i + 1}/#{repos.size} (#{repo[1..-1]})"
+          `curl -s -X POST -d 'repo=#{repo[1..-1]}' -i http://ghcontributors.herokuapp.com/repo`
+        end
+      end
+    end
+  end
+end
