@@ -16,6 +16,16 @@ There are three rake tasks you need to use to setup the app:
 
 That's it, to contribute, fork & pull request!
 
+## To do
+
+Bear in mind this is *my* roadmap, but if you contribute something else and it's cool, I'll merge it anyway :)
+
+* Fix aforementioned problem with the updating process
+* Add ability to update a repo with each commit via [GitHub hooks](https://help.github.com/articles/post-receive-hooks)
+* Detect forks and mirrors and display only the main repo
+* Some nice design ;)
+* Show most interesting/recent/active users in home page instead of a fixed list
+
 ## Copyright & Licensing
 
 Copyright (c) 2013 Sergio Gil. MIT license, see LICENSE for details.
