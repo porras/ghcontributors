@@ -57,7 +57,7 @@ namespace :update do
 end
 
 namespace :data do
-  desc 'Gets most popular repos from Github'
+  desc 'Gets most popular repos from GitHub'
   task :get do
     require 'open-uri'
     require 'nokogiri'
