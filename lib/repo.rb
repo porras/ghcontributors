@@ -1,5 +1,3 @@
-require 'octokit'
-
 class Repo < Struct.new(:name, :doc)
   class << self
     def get(name)
@@ -29,7 +27,7 @@ class Repo < Struct.new(:name, :doc)
   
   def contributors
     {}.tap do |h|
-      Octokit.contributors(name).each do |contributor|
+      GitHub.contributors(name).each do |contributor|
         h[contributor.login] = contributor.contributions
       end
     end
