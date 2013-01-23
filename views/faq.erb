@@ -2,28 +2,102 @@
   
   <h2>GitHub Contributors Frequently Asked Questions</h2>
   
-  <h3>Where does the data come from?</h3>
-  <p>From the <a href="http://developer.github.com/">GitHub API</a>. It's the same data you see in a repo contributors page (see the <a href="https://github.com/rails/rails/graphs/contributors">rails/rails</a> one, for example), but aggregated by user instead of by repo.</p>
+  <h3>
+    Where does the data come from?
+  </h3>
+  <p>
+    From the <a href="http://developer.github.com/">GitHub API</a>.
+    It's the same data you see in a repo contributors page
+    (see the <a href="https://github.com/rails/rails/graphs/contributors">rails/rails</a> one, for example),
+    but aggregated by user instead of by repo.
+  </p>
   
-  <h3>How often is the data updated?</h3>
-  <p>Once a day. One of the improvements planned is to add a hook you can set up in your GitHub repo so it can be updated each time someone pushes.</p>
+  <h3>
+    How often is the data updated?
+  </h3>
+  <p>
+    Once a day.
+    One of the improvements planned
+    is to add a hook you can set up in your GitHub repo
+    so it can be updated each time someone pushes.
+  </p>
   
-  <h3>This site says I have X commits in <em>rails/rails</em> but <a href="http://contributors.rubyonrails.org/">Rails Contributors</a> says I have Y (and X &lt; Y)</h3>
-  <p>This site gets its data automatically from the GitHub API. Rails Contributors instead, thanks to the great <a href="https://github.com/fxn/rails-contributors/blob/master/app/models/names_manager.rb">editorial work</a> done by <a href="http://www.hashref.com/">Xavi</a> and others aggregates commits under a canonical name applying mappings. So, for Rails, Rails Contributors is a more accurate source than GitHub Contributors (but of course it only includes one project).</p>
-  <p>The same may be true for other projects, of course.</p>
+  <h3>
+    This site says I have X commits in <em>rails/rails</em>
+    but <a href="http://contributors.rubyonrails.org/">Rails Contributors</a>
+    says I have Y (and X &lt; Y)
+  </h3>
+  <p>
+    This site gets its data automatically from the GitHub API.
+    Rails Contributors instead,
+    thanks to the great <a href="https://github.com/fxn/rails-contributors/blob/master/app/models/names_manager.rb">editorial work</a>
+    done by <a href="http://www.hashref.com/">Xavi</a> and others,
+    aggregates commits under a canonical name applying mappings.
+    So, for Rails, Rails Contributors is a more accurate source than GitHub Contributors
+    (but of course it only includes one project).
+  </p>
+  <p>
+    The same may be true for other projects, of course.
+  </p>
   
-  <h3>Is there any kind of <em>ranking</em> of users by contributions?</h3>
-  <p>No. This site is only a place where you can show (and be proud of) your open source contributions altogether, or check (and admire) a fellow developer ones, but not any sort of competition. Apart from that, since not all commits are created equal, and some fix small typos in obscure personal projects while other add great features to projects used by millions, it would be a very silly competition.</p>
+  <h3>
+    Is there any kind of <em>ranking</em> of users by contributions?
+  </h3>
+  <p>
+    No. This site is only a place where you can show (and be proud of)
+    your open source contributions altogether,
+    or check (and admire) those of a fellow developer,
+    but not any sort of competition.
+    Apart from that, since not all commits are created equal,
+    and some fix small typos in obscure personal projects
+    while other add great features to projects used by millions,
+    it would be a very silly competition.
+  </p>
   
-  <h3>Which scale do the bars use?</h3>
-  <p>It's a normalized log scale (basically <code>log(X) / log(Max)</code>). It may be a bit confusing but it's the only way I found to, in one hand, show the relative amount of contributions and, in the other, not having lots of tiny tiny bars (most people's contributions are in the 1-10 range). But I'm not much into math so if you think you know a better way, please tell me. If it's true that the most difficult one is the first one, well, that scale conveys that idea ;-)</p>
+  <h3>
+    Which scale do the bars use?
+  </h3>
+  <p>
+    It's a normalized log scale (basically <code>log(X) / log(Max)</code>).
+    It may be a bit confusing but it's the only way I found to,
+    in one hand, show the relative amount of contributions
+    and, in the other, not having lots of tiny tiny bars
+    (most people's contributions are in the 1-10 range).
+    But I'm not much into math,
+    so if you think you know a better way, please tell me.
+    If it's true that the most difficult one is the first one,
+    well, that scale conveys that idea ;-)
+  </p>
   
-  <h3>Who are you?</h3>
-  <p>My name is Sergio Gil, and I'm also known as <em>porras</em> in <a href="http://twitter.com/porras">Twitter</a>, <a href="http://github.com/porras">GitHub</a>, and mostly everywhere else. I'm a Spanish web developer based in Berlin, Germany. I love open source, I love GitHub, and I love what GitHub means for open source.</p>
+  <h3>
+    Who are you?
+  </h3>
+  <p>
+    My name is Sergio Gil, and I'm also known as <em>porras</em>
+    in <a href="http://twitter.com/porras">Twitter</a>,
+    <a href="http://github.com/porras">GitHub</a>,
+    and mostly everywhere else.
+    I'm a Spanish web developer based in Berlin, Germany.
+    I love open source, I love GitHub, and I love what GitHub means for open source.
+  </p>
   
-  <h3>Which technologies does this site use?</h3>
-  <p>Mainly: <a href="http://www.ruby-lang.org/">Ruby</a>, <a href="http://www.sinatrarb.com/">Sinatra</a>, <a href="http://couchdb.apache.org/">CouchDB</a>, <a href="http://heroku.com/">Heroku</a>, <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>.</p>
+  <h3>
+    Which technologies does this site use?
+  </h3>
+  <p>
+    Mainly:
+    <a href="http://www.ruby-lang.org/">Ruby</a>,
+    <a href="http://www.sinatrarb.com/">Sinatra</a>,
+    <a href="http://couchdb.apache.org/">CouchDB</a>,
+    <a href="http://heroku.com/">Heroku</a>,
+    <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>.
+  </p>
   
-  <h3>And where is the code?</h3>
-  <p>In GitHub, <a href="https://github.com/porras/ghcontributors">of course</a>. You can have a look, or contribute by forking it and sending a pull request :)</p>
+  <h3>
+    And where is the code?
+  </h3>
+  <p>
+    In GitHub, <a href="https://github.com/porras/ghcontributors">of course</a>.
+    You can have a look, or contribute by forking it and sending a pull request :)
+  </p>
 </div>

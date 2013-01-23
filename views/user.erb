@@ -8,7 +8,9 @@
   <dd>
     <div class="progress">
       <!-- TODO: normalize bar sizes to max contributor -->
-      <div class="bar" style="width: <%= normalize(n, @user.max_commits) %>%;"><%= commits_link repo, @user.username, n %></div>
+      <div class="bar" style="width: <%= normalize(n, @user.max_commits) %>%;">
+        <%= commits_link repo, @user.username, n %>
+      </div>
   </div>
   </dd>
   <% end %>
