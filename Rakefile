@@ -31,17 +31,32 @@ namespace :db do
       }
     JS
     
-    DB.delete_doc DB.get("_design/ghcontributors") rescue nil
-
-    DB.save_doc({
-      "_id" => "_design/ghcontributors",
-      :views => {
-        :contributions => {:map => CONTRIBUTIONS},
-        :repos => {:map => REPOS},
-        :sizes => {:map => SIZES}
+    BATCHES = <<-JS
+      function(doc) {
+        if (doc.type == "repo") {
+          emit(parseInt(doc._id.substr(-6, 6), 16) % 24, doc.name);
+        }
       }
-    })
-
+    JS
+    
+    VIEWS = { :contributions => {:map => CONTRIBUTIONS},
+              :repos => {:map => REPOS},
+              :sizes => {:map => SIZES},
+              :batches => {:map => BATCHES}
+            }
+    
+    DESIGN_ID = '_design/ghcontributors'
+    
+    begin
+      doc = DB.get(DESIGN_ID)
+      print 'Updating design document...'
+      doc['views'] = VIEWS
+      doc.save
+    rescue RestClient::ResourceNotFound
+      print 'Creating design document...'
+      DB.save_doc('_id' => DESIGN_ID, :views => VIEWS)
+    end
+    puts ' [OK]'
   end
 end
 
@@ -53,6 +68,19 @@ namespace :update do
     repos = Repo.all
     time = Benchmark.measure { repos.each(&:update) }
     puts "Updated %d repos in %0.2f seconds" % [repos.size, time.real]
+  end
+  desc 'Update a batch of repos'
+  task :batch, [:n] do |t, args|
+    raise "Please tell me which batch!" unless args[:n]
+    require './config/init'
+    require 'batch'
+    Batch.new(args[:n].to_i).update
+  end
+  desc 'Update current batch of repos'
+  task :current do
+    require './config/init'
+    require 'batch'
+    Batch.new(Time.now.hour).update
   end
 end
 

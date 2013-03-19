@@ -21,6 +21,7 @@ class Repo < Struct.new(:name, :doc)
   end
   
   def update
+    puts "Getting data from repo #{name}"
     doc['contributors'] = contributors
     DB.save_doc(doc)
   end
