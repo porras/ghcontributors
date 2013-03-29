@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'couchrest', :git => 'git://github.com/couchrest/couchrest.git'
