@@ -1,4 +1,4 @@
-# GitHub Contributors
+# GitHub Contributors [![Build Status](https://travis-ci.org/porras/ghcontributors.png)](https://travis-ci.org/porras/ghcontributors)
 
 This repo contains the app powering [GitHub Contributors](http://ghcontributors.herokuapp.com/),
 a site I did some months ago when I had with some free time ;)
