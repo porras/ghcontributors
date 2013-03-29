@@ -29,7 +29,11 @@
           <form action="/" method="get" class="navbar-form pull-right">
             <input type="text" name="username" class="search-query" placeholder="GitHub username"/>
             <input type="submit" value="Go" class="btn btn-primary"/>
-            <a href="https://github.com/porras/ghcontributors"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+            <a href="https://github.com/porras/ghcontributors">
+              <img style="position: absolute; top: 0; right: 0; border: 0;"
+                   src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"
+                   alt="Fork me on GitHub">
+            </a>
           </form>
         </div>
       </div>
@@ -41,8 +45,12 @@
       <div class="navbar">
         <div class="navbar-inner">
           <div class="container">
-            <p class="navbar-text pull-left">Tracking <%= Repo.count %> repos.</p>
-            <p class="navbar-text pull-right">Miss any repo? <a href="#" id="add_repo_link">Add it yourself</a>.</p>
+            <p class="navbar-text pull-left">
+              Tracking <%= Repo.count %> repos.
+            </p>
+            <p class="navbar-text pull-right">
+              Miss any repo? <a href="#" id="add_repo_link">Add it yourself</a>.
+            </p>
             <form action="/repo" method="post" class="navbar-form pull-right" style="display:none" id="add_repo">
               <input type="text" name="repo" class="search-query" placeholder="user/repo"/>
               <input type="submit" value="Add" class="btn btn-primary btn-mini"/>
