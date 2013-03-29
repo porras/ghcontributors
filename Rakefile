@@ -1,3 +1,12 @@
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.pattern = "test/**/*_test.rb"
+  t.libs << 'test'
+end
+
+task :default => :test
+
 namespace :db do
   desc 'Creates database and views'
   task :setup do
@@ -49,14 +58,14 @@ namespace :db do
     
     begin
       doc = DB.get(DESIGN_ID)
-      print 'Updating design document...'
+      OUT.print 'Updating design document...'
       doc['views'] = VIEWS
       doc.save
     rescue RestClient::ResourceNotFound
-      print 'Creating design document...'
+      OUT.print 'Creating design document...'
       DB.save_doc('_id' => DESIGN_ID, :views => VIEWS)
     end
-    puts ' [OK]'
+    OUT.puts ' [OK]'
   end
 end
 
