@@ -26,13 +26,13 @@ There are three rake tasks you need to use to setup the app:
   so it can break whenever this page changes
   (it might actually be already broken)
 * `rake update:current`: the DB automatically mantains a series of 24 *batches* of repos.
-  This *batches* are meant to update one per hour, so every repo gets updated once per day,
+  These *batches* are meant to update one per hour, so every repo gets updated once per day,
   while not making an insane amount of queries to the GitHub API all at once.
   This task updates a batch based on the current time, and it's meant to be called
   by `cron` once per hour.
 * `rake update:batch[N]`: Updates a specific batch from 0 to 23 (for debugging purposes).
 
-That's it, to contribute, fork & send pull requests!
+That's it! To contribute, fork & send pull requests!
 
 ## To do
 
@@ -42,7 +42,7 @@ I'll merge it anyway :)
 
 * Add ability to update a repo with each commit
   via [GitHub hooks](https://help.github.com/articles/post-receive-hooks)
-* Detect forks and mirrors and display only the main repo
+* Detect forks and mirrors and display only the main repo (see issue #6)
 * Some nice design ;)
 * Show most interesting/recent/active users in home page instead of a fixed list
 
