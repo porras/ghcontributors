@@ -61,14 +61,6 @@ namespace :db do
 end
 
 namespace :update do
-  desc 'Update all repos'
-  task :all do
-    require './config/init'
-    require 'benchmark'
-    repos = Repo.all
-    time = Benchmark.measure { repos.each(&:update) }
-    puts "Updated %d repos in %0.2f seconds" % [repos.size, time.real]
-  end
   desc 'Update a batch of repos'
   task :batch, [:n] do |t, args|
     raise "Please tell me which batch!" unless args[:n]
