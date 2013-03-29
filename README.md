@@ -25,17 +25,12 @@ There are three rake tasks you need to use to setup the app:
   It does so by scraping [this page](https://github.com/languages)
   so it can break whenever this page changes
   (it might actually be already broken)
-* `rake update:all`: this one updates the data for the repos present in the database.
-  It's supposed to be run periodically (once a day for example in production) via `cron`.
-  This way to update the database is not very efficient
-  but for not very big numbers (currently ~3700 in production), <del>it works</del>.
-  **UPDATE**: *GitHub has changed its rate limit for unauthenticated requests to 60 per hour;
-  this means that, even distributing the repos in 24 batches to update one per hour
-  (which was my original plan), it's not going to work.
-  The solution is to reimplement all GitHub API queries to use authentication
-  (in that case the limit is 5000 which should be enough for some time,
-  and if the db eventually exceeds 5000 repos, implement the 24 batches strategy)*.
-  **This means the app is currently broken (and outdated) :(**
+* `rake update:current`: the DB automatically mantains a series of 24 *batches* of repos.
+  This *batches* are meant to update one per hour, so every repo gets updated once per day,
+  while not making an insane amount of queries to the GitHub API all at once.
+  This task updates a batch based on the current time, and it's meant to be called
+  by `cron` once per hour.
+* `rake update:batch[N]`: Updates a specific batch from 0 to 23 (for debugging purposes).
 
 That's it, to contribute, fork & send pull requests!
 
@@ -45,7 +40,6 @@ Bear in mind this is *my* roadmap,
 but if you contribute something else and it's cool,
 I'll merge it anyway :)
 
-* Fix aforementioned problem with the updating process
 * Add ability to update a repo with each commit
   via [GitHub hooks](https://help.github.com/articles/post-receive-hooks)
 * Detect forks and mirrors and display only the main repo
