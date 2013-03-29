@@ -10,4 +10,7 @@ gem 'nokogiri'
 
 group :development do
   gem 'shotgun'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'webmock'
 end
