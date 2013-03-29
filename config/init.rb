@@ -6,7 +6,8 @@ require 'helpers'
 
 require 'couchrest'
 ENV['CLOUDANT_URL'] ||= 'http://localhost:5984'
-DB = CouchRest.database!("#{ENV['CLOUDANT_URL']}/ghcontributors")
+DB = CouchRest.database!("#{ENV['CLOUDANT_URL']}/ghcontributors#{'-test' if ENV['RACK_ENV'] == 'test'}")
+OUT = ENV['RACK_ENV'] == 'test' ? StringIO.new : STDOUT
 
 require 'octokit'
 

@@ -9,19 +9,13 @@ class Repo < Struct.new(:name, :doc)
       get(name) || (DB.save_doc(:type => 'repo', :name => name) && get(name))
     end
     
-    def all
-      DB.view('ghcontributors/repos')['rows'].map do |row|
-        new(row['key'], row['value'])
-      end
-    end
-    
     def count
       DB.view('ghcontributors/repos', :limit => 0)['total_rows']
     end
   end
   
   def update
-    puts "Getting data from repo #{name}"
+    OUT.puts "Getting data from repo #{name}"
     doc['contributors'] = contributors
     DB.save_doc(doc)
   end
