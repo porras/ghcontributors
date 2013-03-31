@@ -14,13 +14,13 @@ class Repo < Struct.new(:name, :doc)
     end
   end
   
-  def update
+  def update(bulk = false)
     OUT.puts "Getting data from repo #{name}"
     doc['contributors'] = contributors
     if contributors.empty?
-      DB.delete_doc(doc)
+      DB.delete_doc(doc, bulk)
     else
-      DB.save_doc(doc)
+      DB.save_doc(doc, bulk)
     end
   end
   
