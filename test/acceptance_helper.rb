@@ -23,6 +23,7 @@ module TestHelper
   def stub_github_api(repo, contributions = {})
     stub_request(:get, "https://api.github.com/repos/#{repo}/contributors?anon=false").
       to_return(:status => 200,
+                :headers => {'Content-Type' => 'application/json; charset=utf-8'},
                 :body => contributions.map { |user, n| {login: user.to_s, contributions: n} }.to_json)
   end
   def stub_github_api_not_found(repo)
