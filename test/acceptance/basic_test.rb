@@ -53,4 +53,19 @@ class BasicTest < AcceptanceTest
     
     assert page.has_content?("user dhh doesn't exist or hasn't committed in any repo")
   end
+  
+  def test_adding_repos_with_spaces
+    stub_github_api('rails/rails', porras: 1)
+    
+    visit '/'
+    
+    fill_in 'repo', with: 'rails / rails'
+    click_button 'Add'
+    
+    assert page.has_content?('Tracking 1 repos')
+    
+    visit '/porras'
+    
+    assert page.has_content?('rails/rails 1 commit')
+  end
 end
