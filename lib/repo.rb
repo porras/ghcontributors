@@ -6,6 +6,7 @@ class Repo < Struct.new(:name, :doc)
     end
     
     def add(name)
+      name.gsub!(/\s+/, '')
       get(name) || (DB.save_doc(:type => 'repo', :name => name) && get(name))
     end
     
