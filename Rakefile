@@ -1,8 +1,11 @@
 require 'rake/testtask'
+require File.join(File.dirname(__FILE__), 'config', 'init')
+require 'batch'
 
 Rake::TestTask.new do |t|
   t.pattern = "test/**/*_test.rb"
   t.libs << 'test'
+  t.verbose = true
 end
 
 task :default => :test
@@ -10,8 +13,6 @@ task :default => :test
 namespace :db do
   desc 'Creates database and views'
   task :setup do
-    require './config/init'
-    
     CONTRIBUTIONS = <<-JS
       function(doc) {
         if (doc.type == "repo") {
@@ -73,14 +74,10 @@ namespace :update do
   desc 'Update a batch of repos'
   task :batch, [:n] do |t, args|
     raise "Please tell me which batch!" unless args[:n]
-    require './config/init'
-    require 'batch'
     Batch.new(args[:n].to_i).update
   end
   desc 'Update current batch of repos'
   task :current do
-    require './config/init'
-    require 'batch'
     Batch.new(Time.now.hour).update
   end
 end
@@ -88,9 +85,8 @@ end
 namespace :data do
   desc 'Gets most popular repos from GitHub'
   task :get do
-    require 'open-uri'
     require 'nokogiri'
-
+    require 'open-uri'
     languages = Nokogiri.parse(open('https://github.com/languages').read).css('.left table tr a').map {|l| l[:href]}.uniq
     languages.each_with_index do |link, i|
       puts "Language #{i + 1}/#{languages.size} (#{link})"
