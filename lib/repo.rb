@@ -17,7 +17,11 @@ class Repo < Struct.new(:name, :doc)
   def update
     OUT.puts "Getting data from repo #{name}"
     doc['contributors'] = contributors
-    DB.save_doc(doc)
+    if contributors.empty?
+      DB.delete_doc(doc)
+    else
+      DB.save_doc(doc)
+    end
   end
   
   def contributors
