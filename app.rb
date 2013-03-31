@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require './config/init'
+require File.join(File.dirname(__FILE__), 'config', 'init')
 
 class GhContributors < Sinatra::Base
   get '/' do

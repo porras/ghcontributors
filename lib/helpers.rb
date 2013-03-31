@@ -12,6 +12,8 @@ module Helpers
   end
   
   def normalize(n, max)
+    return 0 if n == 0
+    return 100 if n == max
     ((Math.log(n) / Math.log(max)) * 90).to_i + 10
   end
 end
