@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'capybara/dsl'
+require 'rack/test'
 require 'webmock/minitest'
 
 WebMock.disable_net_connect!(:allow_localhost => true)
@@ -24,11 +25,24 @@ module TestHelper
     stub_request(:get, "https://api.github.com/repos/#{repo}/contributors?anon=false").
       to_return(:status => 200,
                 :headers => {'Content-Type' => 'application/json; charset=utf-8'},
-                :body => contributions.map { |user, n| {login: user.to_s, contributions: n} }.to_json)
+                :body => MultiJson.dump(contributions.map { |user, n| {login: user.to_s, contributions: n} }))
   end
   def stub_github_api_not_found(repo)
     stub_request(:get, "https://api.github.com/repos/#{repo}/contributors?anon=false").
       to_return(:status => 404)
+  end
+  
+  module ApiHelper
+    include Rack::Test::Methods
+    
+    def post_hook(repo)
+      user, repo = repo.split('/')
+      post '/', payload: MultiJson.dump(repository: {name: repo, owner: {name: user}})
+    end
+
+    def app
+      GhContributors.new
+    end
   end
 end
 

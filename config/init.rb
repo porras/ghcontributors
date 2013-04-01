@@ -4,6 +4,7 @@ require 'bundler/setup'
 
 require 'user'
 require 'repo'
+require 'hook'
 require 'helpers'
 
 require 'couchrest'
