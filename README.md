@@ -40,8 +40,6 @@ Bear in mind this is *my* roadmap,
 but if you contribute something else and it's cool,
 I'll merge it anyway :)
 
-* Add ability to update a repo with each commit
-  via [GitHub hooks](https://help.github.com/articles/post-receive-hooks)
 * Detect forks and mirrors and display only the main repo (see issue #6)
 * Some nice design ;)
 * Show most interesting/recent/active users in home page instead of a fixed list
