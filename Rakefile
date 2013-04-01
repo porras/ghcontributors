@@ -49,10 +49,19 @@ namespace :db do
       }
     JS
     
+    HOOKS = <<-JS
+      function(doc) {
+        if (doc.type == "repo" && doc.hook) {
+          emit(doc.name, doc);
+        }
+      }
+    JS
+    
     VIEWS = { :contributions => {:map => CONTRIBUTIONS},
               :repos => {:map => REPOS},
               :sizes => {:map => SIZES},
-              :batches => {:map => BATCHES}
+              :batches => {:map => BATCHES},
+              :hooks => {:map => HOOKS}
             }
     
     DESIGN_ID = '_design/ghcontributors'

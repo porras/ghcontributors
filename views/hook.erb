@@ -1,0 +1,25 @@
+<div class="hero-unit">
+  
+  <h2>Adding a GitHub post-receive hook</h2>
+  
+  <p>
+    If you add a post-receive hook in you GitHub repo pointing to GitHub Contributors,
+    its data will always up to date.
+    You don't even need to add the repo here, it will be added automatically on the next commit.
+    Here's how you do it:
+  </p>
+  
+  <ol>
+    <li>
+      Go to your repo, click on the <em>Settings</em> tab, and then in <em>Service Hooks</em>.
+    </li>
+    <li>
+      Click on <em>WebHooks URLs</em>. It should be the first option.
+    </li>
+    <li>
+      Fill the URL field with <code>http://ghcontributors.herokuapp.com/</code> and click <em>Update settings</em>.
+    </li>
+  </ol>
+  
+  <p>That's it! With your next commit the info in GitHub Contributors will be updated.</p>
+</div>

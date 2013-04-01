@@ -5,6 +5,7 @@ gem 'couchrest'
 gem 'octokit'
 gem 'rake'
 gem 'nokogiri'
+gem 'yajl-ruby'
 
 group :production do
   gem 'foreman'

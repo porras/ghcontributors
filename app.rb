@@ -14,9 +14,19 @@ class GhContributors < Sinatra::Base
     erb :faq
   end
 
+  get '/hook' do
+    erb :hook
+  end
+
   post '/repo' do
     Repo.add(params[:repo]).update
     redirect back
+  end
+  
+  post '/' do
+    hook = Hook.new(params[:payload])
+    hook.update
+    "Repository #{hook.repo} updated"
   end
 
   get '/:user' do
