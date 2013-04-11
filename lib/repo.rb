@@ -18,7 +18,12 @@ class Repo < Struct.new(:name, :doc)
   def update(options = {})
     bulk = options.delete(:bulk)
     OUT.puts "Getting data from repo #{name}"
-    self.name = doc['name'] = GitHub.repo(name).full_name
+    data = GitHub.repo(name)
+    if data.source
+      DB.delete_doc(doc, bulk)
+      return Repo.add(data.source.full_name).update
+    end
+    self.name = doc['name'] = data.full_name
     doc['contributors'] = contributors
     options.each do |attribute, value|
       doc[attribute] = value
