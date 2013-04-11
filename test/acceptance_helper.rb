@@ -22,6 +22,16 @@ module TestHelper
     end
   end
   def stub_github_api(repo, contributions = {})
+    stub_github_api_repo(repo, full_name: repo)
+    stub_github_api_contributors(repo, contributions)
+  end
+  def stub_github_api_repo(repo, attributes = {})
+    stub_request(:get, "https://api.github.com/repos/#{repo}").
+      to_return(:status => 200,
+                :headers => {'Content-Type' => 'application/json; charset=utf-8'},
+                :body => MultiJson.dump(attributes))
+  end
+  def stub_github_api_contributors(repo, contributions = {})
     stub_request(:get, "https://api.github.com/repos/#{repo}/contributors?anon=false").
       to_return(:status => 200,
                 :headers => {'Content-Type' => 'application/json; charset=utf-8'},
@@ -30,6 +40,13 @@ module TestHelper
   def stub_github_api_not_found(repo)
     stub_request(:get, "https://api.github.com/repos/#{repo}/contributors?anon=false").
       to_return(:status => 404)
+  end
+  def update_all_repos
+    # very inefficient but only way to be sure all repos are updated without coupling to the fact
+    # they're updated by batches; that logic is (will be) tested in batch_test.rb
+    (0..23).each do |i|
+      Batch.new(i).update
+    end
   end
   
   module ApiHelper
