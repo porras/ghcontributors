@@ -18,11 +18,12 @@ class Repo < Struct.new(:name, :doc)
   def update(options = {})
     bulk = options.delete(:bulk)
     OUT.puts "Getting data from repo #{name}"
+    self.name = doc['name'] = GitHub.repo(name).full_name
     doc['contributors'] = contributors
     options.each do |attribute, value|
       doc[attribute] = value
     end
-    if contributors.empty?
+    if doc['contributors'].empty?
       DB.delete_doc(doc, bulk)
     else
       DB.save_doc(doc, bulk)

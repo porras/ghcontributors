@@ -55,12 +55,4 @@ class UpdateTest < AcceptanceTest
     
     assert_not_requested query
   end
-  
-  def update_all_repos
-    # very inefficient but only way to be sure all repos are updated without coupling to the fact
-    # they're updated by batches; that logic is (will be) tested in batch_test.rb
-    (0..23).each do |i|
-      Batch.new(i).update
-    end
-  end
 end
