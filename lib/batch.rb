@@ -6,7 +6,7 @@ class Batch < Struct.new(:batch)
         Repo.new(row['doc']['name'], row['doc']).update(bulk: true)
         @updated = true
       rescue Exception => e
-        OUT.puts "Updating repo '#{row['doc']['name']}' failed with message #{e.message}"
+        OUT.puts "Updating repo '#{row['doc']['name']}' failed with message #{e.message} (#{e.class})"
       end
     end
     DB.bulk_save if @updated
