@@ -38,6 +38,8 @@ module TestHelper
                 :body => MultiJson.dump(contributions.map { |user, n| {login: user.to_s, contributions: n} }))
   end
   def stub_github_api_not_found(repo)
+    stub_request(:get, "https://api.github.com/repos/#{repo}").
+      to_return(:status => 404)
     stub_request(:get, "https://api.github.com/repos/#{repo}/contributors?anon=false").
       to_return(:status => 404)
   end

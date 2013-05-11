@@ -18,16 +18,17 @@ class Repo < Struct.new(:name, :doc)
   def update(options = {})
     bulk = options.delete(:bulk)
     OUT.puts "Getting data from repo #{name}"
-    self.name = doc['name'] = GitHub.repo(name).full_name
-    doc['contributors'] = contributors
+    begin
+      self.name = doc['name'] = GitHub.repo(name).full_name
+      doc['contributors'] = contributors
+    rescue Octokit::NotFound
+      DB.delete_doc(doc, bulk)
+      return
+    end
     options.each do |attribute, value|
       doc[attribute] = value
     end
-    if doc['contributors'].empty?
-      DB.delete_doc(doc, bulk)
-    else
-      DB.save_doc(doc, bulk)
-    end
+    DB.save_doc(doc, bulk)
   end
   
   def contributors
@@ -36,7 +37,5 @@ class Repo < Struct.new(:name, :doc)
         h[contributor.login] = contributor.contributions
       end
     end
-  rescue Octokit::NotFound
-    {}
   end
 end
