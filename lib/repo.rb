@@ -7,36 +7,40 @@ class Repo < Struct.new(:name, :doc)
     
     def add(name)
       name.gsub!(/\s+/, '')
-      get(name) || (DB.save_doc(:type => 'repo', :name => name) && get(name))
+      get(name) || begin
+        return unless name = real_name(name)
+        DB.save_doc(:type => 'repo', :name => name)
+        get(name)
+      end
     end
     
     def count
       DB.view('ghcontributors/repos', :limit => 0)['total_rows']
+    end
+    
+    private
+    
+    def real_name(name)
+      GitHub.repo(name).full_name
+    rescue Octokit::NotFound
+      nil
     end
   end
   
   def update(options = {})
     bulk = options.delete(:bulk)
     OUT.puts "Getting data from repo #{name}"
-    delete && return unless get_data
-    options.each do |attribute, value|
-      doc[attribute] = value
+    if doc['contributors'] = contributors
+      options.each do |attribute, value|
+        doc[attribute] = value
+      end
+      DB.save_doc(doc, bulk)
+    else
+      DB.delete_doc(doc, bulk)
     end
-    DB.save_doc(doc, bulk)
   end
   
   private
-  
-  def get_data
-    self.name = doc['name'] = GitHub.repo(name).full_name
-    doc['contributors'] = contributors
-  rescue Octokit::NotFound
-    nil
-  end
-  
-  def delete(options = {})
-    DB.delete_doc(doc, options[:bulk])
-  end
   
   def contributors
     {}.tap do |h|
@@ -44,5 +48,7 @@ class Repo < Struct.new(:name, :doc)
         h[contributor.login] = contributor.contributions
       end
     end
+  rescue Octokit::NotFound
+    nil
   end
 end
