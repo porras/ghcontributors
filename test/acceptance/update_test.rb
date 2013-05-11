@@ -50,7 +50,7 @@ class UpdateTest < AcceptanceTest
     assert page.has_content?('Tracking 2 repos')
     
     # should not query it again
-    WebMock.reset!
+    WebMock::RequestRegistry.instance.reset!
     update_all_repos
     
     assert_not_requested query
